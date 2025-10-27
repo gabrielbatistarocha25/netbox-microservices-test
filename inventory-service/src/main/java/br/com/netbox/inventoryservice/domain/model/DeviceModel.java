@@ -1,0 +1,14 @@
+package br.com.netbox.inventoryservice.domain.model;
+
+public class DeviceModel {
+    private Long id;
+    private String name;
+    private Manufacturer manufacturer; // O fabricante está no mesmo domínio
+    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Manufacturer getManufacturer() { return manufacturer; }
+    public void setManufacturer(Manufacturer manufacturer) { this.manufacturer = manufacturer; }
+}
