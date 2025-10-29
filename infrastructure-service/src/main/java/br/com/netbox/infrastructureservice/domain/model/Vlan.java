@@ -1,15 +1,12 @@
 package br.com.netbox.infrastructureservice.domain.model;
 
-// POJO Puro
 public class Vlan {
     private Long id;
     private Integer vlanId;
     private String name;
 
-    // ID para o domínio externo
     private Long siteId;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Integer getVlanId() { return vlanId; }

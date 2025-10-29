@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class RackMapper {
 
+    private final SiteMapper siteMapper;
+
+    public RackMapper(SiteMapper siteMapper) {
+         this.siteMapper = siteMapper;
+    }
+
     public RackEntity toEntity(Rack model) {
         if (model == null) return null;
         RackEntity entity = new RackEntity();
@@ -14,7 +20,7 @@ public class RackMapper {
         entity.setName(model.getName());
         entity.setuHeight(model.getuHeight());
         if (model.getSite() != null) {
-            entity.setSite(new SiteMapper().toEntity(model.getSite()));
+            entity.setSite(siteMapper.toEntity(model.getSite()));
         }
         return entity;
     }
@@ -31,7 +37,7 @@ public class RackMapper {
         model.setuHeight(entity.getuHeight());
 
         if (mapSite && entity.getSite() != null) {
-            model.setSite(new SiteMapper().toModel(entity.getSite(), false)); // Evita recursão
+            model.setSite(siteMapper.toModel(entity.getSite(), false));
         }
         return model;
     }

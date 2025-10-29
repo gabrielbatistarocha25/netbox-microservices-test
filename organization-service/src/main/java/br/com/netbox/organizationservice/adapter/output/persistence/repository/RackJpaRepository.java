@@ -4,6 +4,5 @@ import br.com.netbox.organizationservice.adapter.output.persistence.entity.RackE
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-// Copiado de RackRepository.java original
 @Repository
 public interface RackJpaRepository extends JpaRepository<RackEntity, Long> {}

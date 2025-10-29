@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// Copiado de RestExceptionHandler.java original
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 

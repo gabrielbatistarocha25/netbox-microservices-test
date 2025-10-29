@@ -1,10 +1,10 @@
-package br.com.netbox.inventory_service;
+package br.com.netbox.infrastructureservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InventoryServiceApplicationTests {
+class InfrastructureServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

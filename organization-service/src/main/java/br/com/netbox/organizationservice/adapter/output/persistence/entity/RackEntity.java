@@ -12,15 +12,11 @@ public class RackEntity {
     private String name;
     private int uHeight;
 
-    // Copiado de Rack.java original
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "site_id")
     @JsonBackReference("site-racks")
     private SiteEntity site;
 
-    // REMOVEMOS devices
-
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vlans") // Rota base copiada de NetworkController.java original
+@RequestMapping("/api/vlans")
 public class NetworkController {
 
     private final NetworkUseCase networkUseCase;
@@ -21,7 +21,6 @@ public class NetworkController {
 
     @PostMapping
     public ResponseEntity<Vlan> createVlan(@Valid @RequestBody Vlan vlan) {
-        // O modelo de domínio Vlan agora espera 'siteId' no JSON
         Vlan createdVlan = networkUseCase.createVlan(vlan);
         return new ResponseEntity<>(createdVlan, HttpStatus.CREATED);
     }
@@ -32,7 +31,6 @@ public class NetworkController {
         return ResponseEntity.ok(vlans);
     }
 
-    // Endpoint extra para buscar vlans por site
     @GetMapping("/site/{siteId}")
     public ResponseEntity<List<Vlan>> getVlansBySite(@PathVariable Long siteId) {
         List<Vlan> vlans = networkUseCase.getVlansBySite(siteId);

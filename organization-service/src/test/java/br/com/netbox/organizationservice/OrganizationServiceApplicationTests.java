@@ -1,4 +1,4 @@
-package br.com.netbox.organization_service;
+package br.com.netbox.organizationservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

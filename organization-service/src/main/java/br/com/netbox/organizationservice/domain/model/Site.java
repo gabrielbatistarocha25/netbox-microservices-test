@@ -8,7 +8,6 @@ public class Site {
     private Location location;
     private List<Rack> racks;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

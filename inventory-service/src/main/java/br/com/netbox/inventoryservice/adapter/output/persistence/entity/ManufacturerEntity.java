@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 @Table(name = "manufacturer")
 public class ManufacturerEntity {
-    // Código copiado de Manufacturer.java original
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +16,6 @@ public class ManufacturerEntity {
     @JsonManagedReference("manufacturer-models")
     private List<DeviceModelEntity> deviceModels;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface DeviceModelRepositoryPort {
     DeviceModel save(DeviceModel deviceModel);
-    List<DeviceModel> findAll();
-    Optional<DeviceModel> findById(Long id);
+    List<DeviceModel> findAllDeviceModels();
+    Optional<DeviceModel> findDeviceModelById(Long id);
 }

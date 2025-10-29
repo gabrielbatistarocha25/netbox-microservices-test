@@ -4,13 +4,11 @@ public class Device {
     private Long id;
     private String name;
     private Integer position;
-    private DeviceModel deviceModel; // No mesmo domínio
+    private DeviceModel deviceModel;
 
-    // IDs para domínios externos (Microserviço)
     private Long siteId;
     private Long rackId; 
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

@@ -1,6 +1,6 @@
 package br.com.netbox.organizationservice.config;
 
-import jakarta.persistence.EntityNotFoundException; // Importante
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// Copiado de RestExceptionHandler.java original
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 

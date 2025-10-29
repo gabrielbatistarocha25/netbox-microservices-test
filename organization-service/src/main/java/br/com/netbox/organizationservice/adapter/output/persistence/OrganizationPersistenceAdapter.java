@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component // Esta é a implementação da Porta de Saída
+@Component
 public class OrganizationPersistenceAdapter implements LocationRepositoryPort, SiteRepositoryPort, RackRepositoryPort {
 
     private final LocationJpaRepository locationJpaRepository;
@@ -40,81 +40,80 @@ public class OrganizationPersistenceAdapter implements LocationRepositoryPort, S
         this.rackMapper = rackMapper;
     }
 
-    // --- LocationRepositoryPort ---
     @Override
     public Location save(Location location) {
         LocationEntity entity = locationMapper.toEntity(location);
-        LocationEntity savedEntity = locationJpaRepository.save(entity);
-        return locationMapper.toModel(savedEntity);
+        return locationMapper.toModel(locationJpaRepository.save(entity));
     }
 
     @Override
-    public List<Location> findAll() {
+    public List<Location> findAll() { 
         return locationJpaRepository.findAll().stream()
                 .map(locationMapper::toModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Location> findById(Long id) {
+    public Optional<Location> findById(Long id) { 
         return locationJpaRepository.findById(id).map(locationMapper::toModel);
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existsById(Long id) { 
         return locationJpaRepository.existsById(id);
     }
 
-
-    // --- SiteRepositoryPort ---
     @Override
     public Site save(Site site) {
         SiteEntity entity = siteMapper.toEntity(site);
-        // Garante que a localização (se existir) está gerenciada pelo JPA
         if (entity.getLocation() != null && entity.getLocation().getId() != null) {
             locationJpaRepository.findById(entity.getLocation().getId())
                 .ifPresent(entity::setLocation);
         }
-        SiteEntity savedEntity = siteJpaRepository.save(entity);
-        return siteMapper.toModel(savedEntity);
+        return siteMapper.toModel(siteJpaRepository.save(entity));
     }
 
     @Override
-    public List<Site> findAll() {
+    public List<Site> findAllSites() { 
         return siteJpaRepository.findAll().stream()
                 .map(siteMapper::toModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Site> findById(Long id) {
+    public Optional<Site> findSiteById(Long id) { 
         return siteJpaRepository.findById(id).map(siteMapper::toModel);
     }
 
-    // --- RackRepositoryPort ---
+    @Override
+    public boolean siteExistsById(Long id) { 
+         return siteJpaRepository.existsById(id);
+    }
+
     @Override
     public Rack save(Rack rack) {
         RackEntity entity = rackMapper.toEntity(rack);
-        // Garante que o site (se existir) está gerenciado pelo JPA
         if (entity.getSite() != null && entity.getSite().getId() != null) {
             siteJpaRepository.findById(entity.getSite().getId())
                 .ifPresent(entity::setSite);
         }
-        RackEntity savedEntity = rackJpaRepository.save(entity);
-        return rackMapper.toModel(savedEntity);
+        return rackMapper.toModel(rackJpaRepository.save(entity));
     }
 
-    // findAll para Rack
     @Override
-    public List<Rack> findAll() {
+    public List<Rack> findAllRacks() { 
         return rackJpaRepository.findAll().stream()
                 .map(rackMapper::toModel)
                 .collect(Collectors.toList());
     }
 
-    // findById para Rack
     @Override
-    public Optional<Rack> findById(Long id) {
+    public Optional<Rack> findRackById(Long id) { 
         return rackJpaRepository.findById(id).map(rackMapper::toModel);
+    }
+
+    @Override
+     public boolean rackExistsById(Long id) { 
+         return rackJpaRepository.existsById(id);
     }
 }

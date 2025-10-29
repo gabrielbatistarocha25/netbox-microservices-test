@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface RackRepositoryPort {
     Rack save(Rack rack);
-    List<Rack> findAll();
-    Optional<Rack> findById(Long id);
-    boolean existsById(Long id);
+    List<Rack> findAllRacks();
+    Optional<Rack> findRackById(Long id);
+    boolean rackExistsById(Long id);
 }

@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/organization") // Rota base copiada do original
+@RequestMapping("/api/organization") 
 public class OrganizationController {
 
-    // Injeta o CASO DE USO (a interface do domínio)
     private final OrganizationUseCase organizationUseCase;
 
     public OrganizationController(OrganizationUseCase organizationUseCase) {
@@ -22,7 +21,6 @@ public class OrganizationController {
 
     @PostMapping("/locations")
     public ResponseEntity<Location> createLocation(@RequestBody Location location) {
-        // Recebe e retorna o Modelo de Domínio (para simplificar, sem DTOs)
         Location createdLocation = organizationUseCase.createLocation(location);
         return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
     }
@@ -32,7 +30,7 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationUseCase.getAllLocations());
     }
 
-    @GetMapping("/locations/{id}") // Endpoint novo para validação
+    @GetMapping("/locations/{id}") 
     public ResponseEntity<Location> getLocationById(@PathVariable Long id) {
         return ResponseEntity.ok(organizationUseCase.getLocationById(id));
     }
@@ -48,9 +46,8 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationUseCase.getAllSites());
     }
 
-    @GetMapping("/sites/{id}") // Endpoint novo para validação
+    @GetMapping("/sites/{id}") 
     public ResponseEntity<Site> getSiteById(@PathVariable Long id) {
-         // O service vai lançar 404 se não achar
         organizationUseCase.getAllSites().stream()
             .filter(s -> s.getId().equals(id))
             .findFirst()

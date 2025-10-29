@@ -2,12 +2,20 @@ package br.com.netbox.organizationservice.adapter.output.persistence.mapper;
 
 import br.com.netbox.organizationservice.adapter.output.persistence.entity.SiteEntity;
 import br.com.netbox.organizationservice.domain.model.Site;
+import org.springframework.context.annotation.Lazy; 
 import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
 
 @Component
 public class SiteMapper {
+
+    private final LocationMapper locationMapper;
+    private final RackMapper rackMapper;
+
+    public SiteMapper(LocationMapper locationMapper, @Lazy RackMapper rackMapper) {
+        this.locationMapper = locationMapper;
+        this.rackMapper = rackMapper;
+    }
 
     public SiteEntity toEntity(Site model) {
         if (model == null) return null;
@@ -15,17 +23,15 @@ public class SiteMapper {
         entity.setId(model.getId());
         entity.setName(model.getName());
         if (model.getLocation() != null) {
-            entity.setLocation(new LocationMapper().toEntity(model.getLocation()));
+            entity.setLocation(locationMapper.toEntity(model.getLocation()));
         }
-        // Ignoramos racks aqui
         return entity;
     }
 
     public Site toModel(SiteEntity entity) {
-        return toModel(entity, true); // Por padrão, mapeia recursivamente
+        return toModel(entity, true); 
     }
 
-    // Criamos este método auxiliar para controlar a recursão
     public Site toModel(SiteEntity entity, boolean mapLocation) {
         if (entity == null) return null;
         Site model = new Site();
@@ -33,14 +39,14 @@ public class SiteMapper {
         model.setName(entity.getName());
 
         if (mapLocation && entity.getLocation() != null) {
-            model.setLocation(new LocationMapper().toModel(entity.getLocation()));
+            model.setLocation(locationMapper.toModel(entity.getLocation()));
         }
 
         if (entity.getRacks() != null) {
             model.setRacks(entity.getRacks().stream()
                 .map(rackEntity -> {
-                    var rackModel = new RackMapper().toModel(rackEntity, false); // Evita recursão
-                    rackModel.setSite(model); // Define a referência de volta
+                    var rackModel = rackMapper.toModel(rackEntity, false); 
+                    rackModel.setSite(model); 
                     return rackModel;
                 })
                 .collect(Collectors.toList()));

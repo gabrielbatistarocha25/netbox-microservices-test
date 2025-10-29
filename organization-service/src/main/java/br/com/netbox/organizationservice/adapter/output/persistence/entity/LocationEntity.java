@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "location") // Especifica o nome da tabela
+@Table(name = "location") 
 public class LocationEntity {
 
     @Id
@@ -14,12 +14,10 @@ public class LocationEntity {
     private String name;
     private String address;
 
-    // Copiado de Location.java original
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("location-sites")
     private List<SiteEntity> sites;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

@@ -21,7 +21,6 @@ public class OrganizationRestAdapter implements OrganizationApiPort {
     @Override
     public boolean siteExists(Long siteId) {
          try {
-            // Tenta chamar o endpoint GET /api/organization/sites/{id}
             restTemplate.getForEntity(organizationServiceUrl + "/organization/sites/" + siteId, Void.class);
             return true;
         } catch (HttpClientErrorException.NotFound e) {

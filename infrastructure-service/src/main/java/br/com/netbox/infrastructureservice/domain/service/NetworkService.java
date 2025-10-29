@@ -42,7 +42,6 @@ public class NetworkService implements NetworkUseCase {
 
     @Override
     public List<Vlan> getVlansBySite(Long siteId) {
-        // Lógica do NetworkService original
         if (!organizationApiPort.siteExists(siteId)) {
             throw new EntityNotFoundException("Site com id " + siteId + " não encontrado.");
         }

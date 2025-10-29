@@ -9,5 +9,5 @@ public interface OrganizationUseCase {
     Site createSite(Site site);
     List<Location> getAllLocations();
     List<Site> getAllSites();
-    Location getLocationById(Long id); // Adicionamos para validação
+    Location getLocationById(Long id);
 }

@@ -41,7 +41,6 @@ public class InventoryPersistenceAdapter implements ManufacturerRepositoryPort, 
         this.deviceMapper = deviceMapper;
     }
 
-    // --- ManufacturerRepositoryPort ---
     @Override
     public Manufacturer save(Manufacturer manufacturer) {
         ManufacturerEntity entity = manufacturerMapper.toEntity(manufacturer);
@@ -60,11 +59,9 @@ public class InventoryPersistenceAdapter implements ManufacturerRepositoryPort, 
         return manufacturerJpaRepository.findById(id).map(manufacturerMapper::toModel);
     }
 
-    // --- DeviceModelRepositoryPort ---
     @Override
     public DeviceModel save(DeviceModel deviceModel) {
         DeviceModelEntity entity = deviceModelMapper.toEntity(deviceModel);
-        // Garante que o fabricante (interno) está gerenciado
         if (entity.getManufacturer() != null && entity.getManufacturer().getId() != null) {
             manufacturerJpaRepository.findById(entity.getManufacturer().getId())
                 .ifPresent(entity::setManufacturer);
@@ -73,22 +70,20 @@ public class InventoryPersistenceAdapter implements ManufacturerRepositoryPort, 
     }
 
     @Override
-    public List<DeviceModel> findAll() {
+    public List<DeviceModel> findAllDeviceModels() { 
         return deviceModelJpaRepository.findAll().stream()
                 .map(deviceModelMapper::toModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<DeviceModel> findById(Long id) {
+    public Optional<DeviceModel> findDeviceModelById(Long id) { 
         return deviceModelJpaRepository.findById(id).map(deviceModelMapper::toModel);
     }
 
-    // --- DeviceRepositoryPort ---
     @Override
     public Device save(Device device) {
         DeviceEntity entity = deviceMapper.toEntity(device);
-        // Garante que o modelo (interno) está gerenciado
         if (entity.getDeviceModel() != null && entity.getDeviceModel().getId() != null) {
             deviceModelJpaRepository.findById(entity.getDeviceModel().getId())
                 .ifPresent(entity::setDeviceModel);
@@ -97,19 +92,19 @@ public class InventoryPersistenceAdapter implements ManufacturerRepositoryPort, 
     }
 
     @Override
-    public List<Device> findAll() {
+    public List<Device> findAllDevices() { 
         return deviceJpaRepository.findAll().stream()
                 .map(deviceMapper::toModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Device> findById(Long id) {
+    public Optional<Device> findDeviceById(Long id) {
         return deviceJpaRepository.findById(id).map(deviceMapper::toModel);
     }
 
     @Override
-    public List<Device> findBySiteId(Long siteId) {
+    public List<Device> findBySiteId(Long siteId) { 
         return deviceJpaRepository.findBySiteId(siteId).stream()
                 .map(deviceMapper::toModel)
                 .collect(Collectors.toList());

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/racks") // Rota base copiada do original
+@RequestMapping("/api/racks")
 public class RackController {
 
     private final RackUseCase rackUseCase;

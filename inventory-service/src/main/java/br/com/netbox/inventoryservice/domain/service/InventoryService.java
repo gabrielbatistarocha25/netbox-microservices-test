@@ -54,14 +54,11 @@ public class InventoryService implements InventoryUseCase {
     @Override
     public List<DeviceModel> getAllDeviceModels() {
         // Lógica do DeviceService original
-        return deviceModelRepository.findAll();
+        return deviceModelRepository.findAllDeviceModels();
     }
 
     @Override
     public Device createDevice(Device device) {
-        // Lógica do DeviceService original
-
-        // 1. Validação externa: Chama o organization-service
         if (device.getSiteId() == null) {
              throw new IllegalArgumentException("O ID do Site é obrigatório.");
         }
@@ -69,18 +66,16 @@ public class InventoryService implements InventoryUseCase {
             throw new EntityNotFoundException("Site com id " + device.getSiteId() + " não encontrado.");
         }
 
-        // 2. Validação externa: Chama o organization-service
         if (device.getRackId() != null) {
             if (!organizationApiPort.rackExists(device.getRackId())) {
                 throw new EntityNotFoundException("Rack com id " + device.getRackId() + " não encontrado.");
             }
         }
 
-        // 3. Validação interna: (DeviceModel está no mesmo serviço)
         if (device.getDeviceModel() == null || device.getDeviceModel().getId() == null) {
              throw new IllegalArgumentException("O ID do Modelo de Dispositivo é obrigatório.");
         }
-        deviceModelRepository.findById(device.getDeviceModel().getId())
+        deviceModelRepository.findDeviceModelById(device.getDeviceModel().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Modelo de Dispositivo com id " + device.getDeviceModel().getId() + " não encontrado."));
 
         return deviceRepository.save(device);
@@ -88,14 +83,11 @@ public class InventoryService implements InventoryUseCase {
 
     @Override
     public List<Device> getAllDevices() {
-        // Lógica do DeviceService original
-        return deviceRepository.findAll();
+        return deviceRepository.findAllDevices();
     }
 
     @Override
     public List<Device> getDevicesBySite(Long siteId) {
-        // Lógica do DeviceService original
-        // Valida se o site existe antes de buscar
         if (!organizationApiPort.siteExists(siteId)) {
             throw new EntityNotFoundException("Site com id " + siteId + " não encontrado.");
         }

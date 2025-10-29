@@ -14,7 +14,6 @@ public class SiteEntity {
     private Long id;
     private String name;
 
-    // Copiado de Site.java original
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     @JsonBackReference("location-sites")
@@ -24,9 +23,6 @@ public class SiteEntity {
     @JsonManagedReference("site-racks")
     private List<RackEntity> racks;
 
-    // REMOVEMOS vlans e devices
-
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

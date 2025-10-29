@@ -13,20 +13,17 @@ public class DeviceEntity {
     private String name;
     private Integer position;
 
-    // IDs de domínios externos. Sem @ManyToOne!
     @Column(name = "site_id")
     private Long siteId;
 
     @Column(name = "rack_id")
     private Long rackId;
 
-    // Relação interna, copiada do Device.java original
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "devicemodel_id")
     @JsonBackReference("model-devices")
     private DeviceModelEntity deviceModel;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

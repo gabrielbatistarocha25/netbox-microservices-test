@@ -23,13 +23,11 @@ public class RackService implements RackUseCase {
 
     @Override
     public Rack createRack(Rack rack) {
-        // Lógica copiada do seu RackService original
         if (rack.getSite() == null || rack.getSite().getId() == null) {
             throw new IllegalArgumentException("O ID do Site é obrigatório para criar um Rack.");
         }
 
-        // A validação usa a porta do Site
-        Site site = siteRepositoryPort.findById(rack.getSite().getId())
+        Site site = siteRepositoryPort.findSiteById(rack.getSite().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Site com id " + rack.getSite().getId() + " não encontrado."));
 
         rack.setSite(site);
@@ -38,12 +36,12 @@ public class RackService implements RackUseCase {
 
     @Override
     public List<Rack> getAllRacks() {
-        return rackRepositoryPort.findAll();
+        return rackRepositoryPort.findAllRacks();
     }
 
     @Override
     public Rack getRackById(Long id) {
-         return rackRepositoryPort.findById(id)
+         return rackRepositoryPort.findRackById(id)
             .orElseThrow(() -> new EntityNotFoundException("Rack com id " + id + " não encontrado."));
     }
 }

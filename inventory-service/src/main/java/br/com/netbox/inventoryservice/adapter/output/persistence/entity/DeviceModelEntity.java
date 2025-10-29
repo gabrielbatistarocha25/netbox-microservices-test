@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 @Table(name = "device_model")
 public class DeviceModelEntity {
-    // Código copiado de DeviceModel.java original
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

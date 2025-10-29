@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-// Baseado no VlanRepository.java original
 @Repository
 public interface VlanJpaRepository extends JpaRepository<VlanEntity, Long> {
 

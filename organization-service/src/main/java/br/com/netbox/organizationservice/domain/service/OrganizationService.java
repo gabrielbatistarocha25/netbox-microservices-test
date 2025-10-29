@@ -10,13 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service // Esta anotação torna a classe um Bean gerenciado pelo Spring
+@Service 
 public class OrganizationService implements OrganizationUseCase {
 
     private final LocationRepositoryPort locationRepositoryPort;
     private final SiteRepositoryPort siteRepositoryPort;
 
-    // Injetando as portas (dependemos de interfaces, não de implementações)
     public OrganizationService(LocationRepositoryPort locationRepositoryPort, SiteRepositoryPort siteRepositoryPort) {
         this.locationRepositoryPort = locationRepositoryPort;
         this.siteRepositoryPort = siteRepositoryPort;
@@ -24,17 +23,15 @@ public class OrganizationService implements OrganizationUseCase {
 
     @Override
     public Location createLocation(Location location) {
-        // Lógica copiada do seu OrganizationService original
         return locationRepositoryPort.save(location);
     }
 
     @Override
     public Site createSite(Site site) {
-        // Lógica copiada do seu OrganizationService original
         if (site.getLocation() == null || site.getLocation().getId() == null) {
             throw new IllegalArgumentException("O ID da Localização é obrigatório.");
         }
-        // A validação agora usa a porta
+
         Location location = locationRepositoryPort.findById(site.getLocation().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Localização com id " + site.getLocation().getId() + " não encontrada."));
 
@@ -49,7 +46,7 @@ public class OrganizationService implements OrganizationUseCase {
 
     @Override
     public List<Site> getAllSites() {
-        return siteRepositoryPort.findAll();
+        return siteRepositoryPort.findAllSites();
     }
 
     @Override

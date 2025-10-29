@@ -6,7 +6,6 @@ public class Rack {
     private int uHeight;
     private Site site;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

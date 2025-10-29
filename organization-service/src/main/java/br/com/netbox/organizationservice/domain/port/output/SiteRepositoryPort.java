@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface SiteRepositoryPort {
     Site save(Site site);
-    List<Site> findAll();
-    Optional<Site> findById(Long id);
-    boolean existsById(Long id);
+    List<Site> findAllSites();
+    Optional<Site> findSiteById(Long id);
+    boolean siteExistsById(Long id);
 }

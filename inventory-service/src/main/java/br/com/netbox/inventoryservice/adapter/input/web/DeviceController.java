@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api") // Rota base copiada de DeviceController.java original
+@RequestMapping("/api")
 public class DeviceController {
 
-    // Injeta o CASO DE USO (a interface do domínio)
     private final InventoryUseCase inventoryUseCase;
 
     public DeviceController(InventoryUseCase inventoryUseCase) {
@@ -44,7 +43,6 @@ public class DeviceController {
 
     @PostMapping("/devices")
     public ResponseEntity<Device> createDevice(@Valid @RequestBody Device device) {
-        // O modelo de domínio Device agora espera siteId e rackId no JSON
         return new ResponseEntity<>(inventoryUseCase.createDevice(device), HttpStatus.CREATED);
     }
 
@@ -53,7 +51,7 @@ public class DeviceController {
         return ResponseEntity.ok(inventoryUseCase.getAllDevices());
     }
 
-    @GetMapping("/sites/{siteId}/devices") // Rota original
+    @GetMapping("/sites/{siteId}/devices")
     public ResponseEntity<List<Device>> getDevicesBySite(@PathVariable Long siteId) {
         List<Device> devices = inventoryUseCase.getDevicesBySite(siteId);
         return ResponseEntity.ok(devices);
