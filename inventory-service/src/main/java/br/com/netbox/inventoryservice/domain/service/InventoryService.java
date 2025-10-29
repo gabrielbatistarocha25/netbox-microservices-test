@@ -72,11 +72,11 @@ public class InventoryService implements InventoryUseCase {
             }
         }
 
-        if (device.getDeviceModel() == null || device.getDeviceModel().getId() == null) {
-             throw new IllegalArgumentException("O ID do Modelo de Dispositivo é obrigatório.");
+        if (device.getDeviceModelId() == null) {
+            throw new IllegalArgumentException("O ID do Modelo de Dispositivo é obrigatório.");
         }
-        deviceModelRepository.findDeviceModelById(device.getDeviceModel().getId())
-                .orElseThrow(() -> new EntityNotFoundException("Modelo de Dispositivo com id " + device.getDeviceModel().getId() + " não encontrado."));
+        deviceModelRepository.findDeviceModelById(device.getDeviceModelId())
+            .orElseThrow(() -> new EntityNotFoundException("Modelo de Dispositivo com id " + device.getDeviceModelId() + " não encontrado."));
 
         return deviceRepository.save(device);
     }

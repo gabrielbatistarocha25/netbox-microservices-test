@@ -1,9 +1,12 @@
 package br.com.netbox.organizationservice.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Rack {
     private Long id;
     private String name;
     private int uHeight;
+    @JsonBackReference("site-racks")
     private Site site;
 
     public Long getId() { return id; }

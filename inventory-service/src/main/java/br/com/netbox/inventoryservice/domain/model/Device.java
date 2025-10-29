@@ -4,7 +4,7 @@ public class Device {
     private Long id;
     private String name;
     private Integer position;
-    private DeviceModel deviceModel;
+    private Long deviceModelId;
 
     private Long siteId;
     private Long rackId; 
@@ -15,8 +15,8 @@ public class Device {
     public void setName(String name) { this.name = name; }
     public Integer getPosition() { return position; }
     public void setPosition(Integer position) { this.position = position; }
-    public DeviceModel getDeviceModel() { return deviceModel; }
-    public void setDeviceModel(DeviceModel deviceModel) { this.deviceModel = deviceModel; }
+    public Long getDeviceModelId() { return deviceModelId; }
+    public void setDeviceModelId(Long deviceModelId) { this.deviceModelId = deviceModelId; }
     public Long getSiteId() { return siteId; }
     public void setSiteId(Long siteId) { this.siteId = siteId; }
     public Long getRackId() { return rackId; }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DeviceMapper {
-
     private final DeviceModelMapper deviceModelMapper;
 
     public DeviceMapper(DeviceModelMapper deviceModelMapper) {
@@ -19,11 +18,9 @@ public class DeviceMapper {
         entity.setId(model.getId());
         entity.setName(model.getName());
         entity.setPosition(model.getPosition());
-        entity.setSiteId(model.getSiteId()); 
-        entity.setRackId(model.getRackId()); 
-        if (model.getDeviceModel() != null) {
-            entity.setDeviceModel(deviceModelMapper.toEntity(model.getDeviceModel()));
-        }
+        entity.setSiteId(model.getSiteId());
+        entity.setRackId(model.getRackId());
+
         return entity;
     }
 
@@ -33,10 +30,11 @@ public class DeviceMapper {
         model.setId(entity.getId());
         model.setName(entity.getName());
         model.setPosition(entity.getPosition());
-        model.setSiteId(entity.getSiteId()); 
-        model.setRackId(entity.getRackId()); 
+        model.setSiteId(entity.getSiteId());
+        model.setRackId(entity.getRackId());
+
         if (entity.getDeviceModel() != null) {
-            model.setDeviceModel(deviceModelMapper.toModel(entity.getDeviceModel()));
+             model.setDeviceModelId(entity.getDeviceModel().getId());
         }
         return model;
     }

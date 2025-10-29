@@ -2,10 +2,15 @@ package br.com.netbox.organizationservice.domain.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class Site {
     private Long id;
     private String name;
+    @JsonBackReference("location-sites")
     private Location location;
+    @JsonManagedReference("site-racks") 
     private List<Rack> racks;
 
     public Long getId() { return id; }

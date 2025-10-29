@@ -18,15 +18,26 @@
             "mainClass": "br.com.netbox.inventoryservice.InventoryServiceApplication",
             "projectName": "inventory-service",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10527 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=inventory-service"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-InfraestructureServiceApplication<infrastructure-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.netbox.infrastructureservice.InfrastructureServiceApplication",
+            "projectName": "infrastructure-service",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
         {
             "type": "java",
-            "name": "Spring Boot-InfraestructureServiceApplication<infraestructure-service>",
+            "name": "Spring Boot-InfrastructureserviceServiceApplication<infrastructure-service>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "br.com.netbox.infrastructureservice.InfraestructureServiceApplication",
-            "projectName": "infraestructure-service",
+            "mainClass": "br.com.netbox.infrastructureservice.InfrastructureserviceServiceApplication",
+            "projectName": "infrastructure-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
